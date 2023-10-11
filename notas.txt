@@ -1,0 +1,46 @@
+Buen dia, estoy desarrollando un conector para capturar los datos de las facturas emitidas de mygestion, cuento con la demo de prueba ya precargada. Encuentro 2 API para consultar que son ApiFacturasCliente y ApiDetallesFacturasCliente y ninguna esta con todos los datos completos.
+
+Quiero ver las facturas, pero antes debo consultar los ID, luego al llamar por ID de factura por ejemplo la 34 (corresponde a la factura 1 de Andrades consulting por 211,75 en las cuales vendio una camara digital y un telefono movil).
+
+Si llamo a DETALLES FACTURAS CLIENTE debo hacerlo no por ID de factura sino por ID de detalle (seria el 37) y me trae solo el producto camara digital, la cantidad, precio de venta y % de iva. l hacer esto debo adivinar a quien se le vendio, cual es su nif, que mas le vendio, etc, es decir que no esta la informacion completa de la factura.
+
+
+
+Si llamo a FACTURAS CLIENTE me trae mas completo pero sin el NIF del cliente, sin el producto y cantidad que se vendio, etc.
+
+
+Es decir, que para saber el detalle completo de una factura emitida debo llamar a 5 API:
+
+1- DETALLES FACTURAS CLIENTE para consultar los ID
+
+2- DETALLES FACTURAS CLIENTE por cada ID del detalle y relacionarlo luego con el ID Factura
+
+3-FACTURAS CLIENTE para consultar los ID
+
+4- FACTURAS CLIENTE por cada ID
+
+5- CLIENTES y relacionarlo con la facturas.
+
+
+
+Entonces les consulto No hay una que reuna todos los campos de la factura? Porque es muy engorroso que para ver el contenido de una factura haya que llamar a tantas API.
+
+//------------------------------------------------------------------------------------------------------------------
+
+Así es, el orden sería:
+
+
+1-FACTURAS CLIENTE para consultar los ID
+
+2-FACTURAS CLIENTE por cada ID
+
+3-CLIENTES entrado por cliente obtenido de FACTURAS CLIENTE
+
+4-DETALLES FACTURAS CLIENTE buscando por ID Factura 
+
+//-------------------------------------------------------
+
+Para poder hacerlo llamo a 2 API
+ApiFacturasCliente o ApiFacturasProveedor (esta ultima hoy no me devuelve nada, debe tener algun error) que son las que me devuelven la gran mayoria de la info, pero les tengo que pasar el idFactura en la api sino me trae todos los idFacturas solo.
+
+ApiDetallesFacturasCliente o ApiDetallesFacturasProveedor estas me devuelven algunos campos del producto vendido o comprado, el problema que tiene es que trae solo un articulo, si hay mas articulos en las facturas hay que llamarlos aparte tambien, porque trae por id de articulo y no po idFactura.
