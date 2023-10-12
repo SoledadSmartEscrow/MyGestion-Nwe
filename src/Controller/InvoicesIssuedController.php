@@ -61,11 +61,11 @@ class InvoicesIssuedController extends AbstractController
             if (!in_array($facturaId, $processedFacturaIds)) {
                 $invoice = [
                     "factura" => [
-                        "id" => (string)$xml->factura->id,
-                        "Ejercicio" => (string)$xml->factura->asiento_ejercicio,
+                        "id" => (int)$xml->factura->id,
+                        "Ejercicio" => (int)$xml->factura->asiento_ejercicio,
                         "Serie" => (string)$xml->factura->serie,
                         "Tipo" => (string)$xml->factura->tipo_factura,
-                        "Numero de Factura" => (string)$xml->factura->factura,
+                        "Numero de Factura" => (int)$xml->factura->factura,
                         "Fecha de Emision" => (string)$xml->factura->fecha_factura,
                         "Fecha de Vencimiento" => (string)$xml->factura->fecha_vto,
                         "Razon Social Cliente" => (string)$xml->factura->nombre_cliente,
@@ -73,18 +73,18 @@ class InvoicesIssuedController extends AbstractController
                         "Pagada" => (string)$xml->factura->pagada,
                         "Fecha de Pago" => (string)$xml->factura->fecha_pago,
                         "Moneda" => (string)$xml->factura->divisa,
-                        "Total antes de los descuentos" => (string)$xml->factura->importe_detalles,
+                        "Total antes de los descuentos" => number_format((float)$xml->factura->importe_detalles, 2),
                         "% Descuento Pronto Pago" => (string)$xml->factura->porcen_dto_pp,
                         "% Descuento Especial" => (string)$xml->factura->porcen_dto_especial,
                         "Recargo Equivalente" => (string)$xml->factura->recargo_equiv,
                         "% Recargo Financiero" => (string)$xml->factura->porcen_rec_financiero,
-                        "Importe Total Recargo Financiero" => (string)$xml->factura->rec_financiero,
-                        "Importe Entrega a cuenta" => (string)$xml->factura->entrega_a_cuenta,
+                        "Importe Total Recargo Financiero" => number_format((float)$xml->factura->rec_financiero, 2),
+                        "Importe Entrega a cuenta" => number_format((float)$xml->factura->entrega_a_cuenta, 2),
                         "% IRPF" => (string)$xml->factura->porcen_irpf,
-                        "Importe Total IRPF" => (string)$xml->factura->irpf,
-                        "Base Imponible" => (string)$xml->factura->base_imponible,
-                        "Total IVA" => (string)$xml->factura->iva,
-                        "Importe Total Factura" => (string)$xml->factura->total_factura,
+                        "Importe Total IRPF" => number_format((float)$xml->factura->irpf, 2),
+                        "Base Imponible" => number_format((float)$xml->factura->base_imponible, 2),
+                        "Total IVA" => number_format((float)$xml->factura->iva, 2),
+                        "Importe Total Factura" => number_format((float)$xml->factura->total_factura, 2),
 
                     ]
                 ];
