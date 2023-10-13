@@ -86,7 +86,7 @@ class InvoicesReceivedController extends AbstractController
                 "Total Detalle" => $detalleData['total_detalle'],
                 "% de Descuento" => $detalleData['porcen_dto'],
                 "Descuento Lineal" => $detalleData['dto_lineal'],
-                //"Año" => $facturaData['anio'],
+                "Año" => isset($facturaData['anio']) ? $facturaData['anio'] : "",
                 "Tipo" => isset($facturaData['tipo_factura']) ? $facturaData['tipo_factura'] : "",
                 "Serie" => isset($facturaData['serie']) ? $facturaData['serie'] : "",
                 "Número de Factura" => isset($facturaData['factura']) ? $facturaData['factura'] : "",
